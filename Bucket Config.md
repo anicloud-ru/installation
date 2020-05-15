@@ -1,3 +1,4 @@
+```
 server-1
     |___ anime-episodes
 
@@ -9,3 +10,4 @@ server-3
     
 server-4
     |___ torrents
+```
