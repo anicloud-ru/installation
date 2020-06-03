@@ -1,3 +1,4 @@
+Initially installation
 ```
 apt-get update && apt-get upgrade
 apt-get install git nginx
