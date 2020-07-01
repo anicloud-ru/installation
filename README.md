@@ -58,3 +58,32 @@ alter user animelib_development with password 'XXXX';
 alter user animelib_production with password 'XXXX';
 alter user animelib_test with password 'XXXX';
 ```
+Setting Up Nginx
+```
+server {
+    listen 443 ssl http2;
+    client_max_body_size 1G;
+    server_name animelib.ru;
+    keepalive_timeout 5;
+    ssl_certificate /etc/ssl/animelib.crt;
+    ssl_certificate_key /etc/ssl/animelib.key;
+    root /root/animelib/public;
+    try_files $uri/index.html $uri.html $uri @myapp;
+
+    location @myapp {
+        proxy_pass http://unix:/root/animelib/tmp/sockets/unicorn.socket;
+        proxy_set_header  Host $http_host;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header  X-Forwarded-Proto $scheme;
+        proxy_set_header  X-Forwarded-Ssl on;
+        proxy_set_header  X-Forwarded-Port $server_port;
+        proxy_set_header  X-Forwarded-Host $host;
+        proxy_redirect off;
+    }
+
+    error_page 500 502 503 504 /500.html;
+    location = /500.html {
+        root /root/animelib/public;
+    }
+}
+```
