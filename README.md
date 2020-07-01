@@ -1,7 +1,7 @@
 Initially installation
 ```
 apt-get update && apt-get upgrade
-apt-get install git nginx
+apt-get install git nginx libpq-dev
 ```
 
 Installing RVM and Ruby
@@ -34,4 +34,12 @@ Installing Yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt update && apt install --no-install-recommends yarn
+```
+
+Installing PostgreSQL
+```
+sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt-get update
+apt-get install postgresql
 ```
