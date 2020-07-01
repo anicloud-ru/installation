@@ -42,4 +42,19 @@ sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 apt-get update
 apt-get install postgresql
+
+su - postgres
+psql
+create user animelib_development;
+create user animelib_production;
+create user animelib_test;
+alter user animelib_development createdb;
+alter user animelib_production createdb;
+alter user animelib_test createdb;
+alter user animelib_development with superuser;
+alter user animelib_production with superuser;
+alter user animelib_test with superuser;
+alter user animelib_development with password 'XXXX';
+alter user animelib_production with password 'XXXX';
+alter user animelib_test with password 'XXXX';
 ```
