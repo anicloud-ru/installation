@@ -1,3 +1,5 @@
+OS - Debian 10.4 Buster
+
 Initially installation
 ```
 apt-get update && apt-get upgrade
