@@ -1,7 +1,7 @@
 Initially installation
 ```
 apt-get update && apt-get upgrade
-apt-get install git nginx libpq-dev
+apt-get install git nginx libpq-dev gpg
 ```
 
 Installing RVM and Ruby
