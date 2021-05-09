@@ -14,6 +14,9 @@ cd animelib
 
 git pull origin master
 bundle install
+RAILS_ENV=production rails db:migrate
+RAILS_ENV=production rails db:migrate
+RAILS_ENV=production rails db:migrate
 yarn
 RAILS_ENV=production rails assets:precompile
 
