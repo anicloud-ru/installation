@@ -1,0 +1,23 @@
+#!/bin/bash
+
+UPID=`cat ~/animelib/tmp/pids/unicorn.pid`
+RPID=`cat /var/run/redis.pid`
+
+cd ~
+
+service nginx stop
+service postgresql stop
+kill -9 ${UPID}
+kill -9 ${RPID}
+
+cd animelib
+
+git pull origin master
+bundle install
+yarn
+RAILS_ENV=production rails assets:precompile
+
+redis-server /etc/redis/redis.conf
+service postgresql start
+bundle exec unicorn -c config/unicorn.rb -D -E production
+service nginx start
